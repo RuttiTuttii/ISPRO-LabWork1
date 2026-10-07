@@ -1,0 +1,65 @@
+:root {
+  color-scheme: light;
+  /* основная палитра беж черный белый */
+  --bg-main: #f7f4ee;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #fbf9f5;
+  --bg-hover: #ede7dc;
+  --bg-accent: #1e1b18;
+
+  /* текстовые цвета */
+  --text-primary: #1a1816;
+  --text-secondary: #6b665f;
+  --text-muted: #999288;
+  --text-on-dark: #fcfbf9;
+
+  /* бордеры и разделители */
+  --border-light: #e6dfd3;
+  --border-focus: #1e1b18;
+
+  /* акцентные оттенки для оценок */
+  --grade-green: #2f6b43;
+  --grade-blue: #32587a;
+  --grade-yellow: #8f6c18;
+  --grade-red: #8f2f2f;
+
+  /* скругления кнопок и карточек */
+  --radius-pill: 9999px;
+  --radius-card: 16px;
+  --radius-control: 12px;
+
+  /* тени */
+  --shadow-subtle: 0 2px 8px rgba(30, 27, 24, 0.04);
+  --shadow-pop: 0 10px 30px rgba(30, 27, 24, 0.08);
+
+  /* шрифты */
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Times New Roman", Times, serif;
+}
+
+/* переназначаем глобальный скроллбар под акцент */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7beaee0;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* для лисы тоже настраиваем */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c7beae var(--bg-main);
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ispro-labwork1",
+  "version": "1.0.0",
+  "description": "учебная платформа для изучения лекций, тестов и интерактива",
+  "scripts": {
+    "start": "node run.js",
+    "dev": "node run.js",
+    "backend": "./backend/.venv/bin/uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload",
+    "test": "PYTHONPATH=. ./backend/.venv/bin/pytest backend/tests/ -v"
+  },
+  "keywords": [
+    "education",
+    "fastapi",
+    "testing",
+    "interactive"
+  ],
+  "author": "Егор Радин",
+  "license": "MIT"
+}

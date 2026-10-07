@@ -1,0 +1,181 @@
+<mxfile host="Electron" modified="2026-10-07T06:30:00.000Z" agent="Mozilla/5.0" version="23.1.5" type="device">
+  <diagram name="1. Макет модуля лекций" id="page-lectures">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- рамка окна браузера -->
+        <mxCell id="wnd-1" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="740" height="520" as="geometry" />
+        </mxCell>
+        
+        <!-- шапка с навигацией -->
+        <mxCell id="hdr-1" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="740" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="logo-1" value="ИСРПО / ЛР №1: Структура проекта" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=13;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="220" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- вкладки меню -->
+        <mxCell id="tab-l" value="Лекции" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#000000;fontFamily=Times New Roman;fontSize=12;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="52" width="70" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tab-t" value="Тесты" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="370" y="52" width="70" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tab-i" value="Интерактив" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="450" y="52" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tab-s" value="Схемы" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="540" y="52" width="60" height="26" as="geometry" />
+        </mxCell>
+        
+        <!-- переключатель роли -->
+        <mxCell id="role-box" value="Радин Е. Д. [Студент]" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="630" y="52" width="130" height="26" as="geometry" />
+        </mxCell>
+        
+        <!-- строка фильтра и поиска -->
+        <mxCell id="flt-sel" value="Тема: Все темы курса ▼" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=11;fontColor=#000000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="160" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flt-search" value="Поиск по лекциям..." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=11;fontColor=#666666;align=left;" vertex="1" parent="1">
+          <mxGeometry x="230" y="110" width="160" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flt-cnt" value="Найдено: 3" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontFamily=Times New Roman;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flt-view" value="Вид: [Карточки] [Список]" style="text;html=1;align=right;verticalAlign=middle;fontFamily=Times New Roman;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="600" y="110" width="160" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- карточка лекции 1 -->
+        <mxCell id="card-1" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="210" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c1-t" value="Структура проекта: от монолита к чистой архитектуре" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="70" y="170" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c1-b" value="Изучено" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontFamily=Times New Roman;fontSize=10;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="70" y="220" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c1-f" value="Время: 8 мин | На странице: 06:10" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=10;fontColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="70" y="280" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- карточка лекции 2 -->
+        <mxCell id="card-2" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="160" width="210" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c2-t" value="Паттерны проектирования GoF в архитектуре приложений" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="300" y="170" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c2-b" value="В процессе" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontFamily=Times New Roman;fontSize=10;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="300" y="220" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c2-f" value="Время: 12 мин | На странице: 02:00" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=10;fontColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- карточка лекции 3 -->
+        <mxCell id="card-3" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="160" width="210" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c3-t" value="Автоматизация CI/CD пайплайнов и сборка артефактов" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="530" y="170" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c3-b" value="Новая" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontFamily=Times New Roman;fontSize=10;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="530" y="220" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c3-f" value="Время: 6 мин | На странице: 00:00" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=10;fontColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="530" y="280" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- блок читалки внизу для пояснения структуры -->
+        <mxCell id="reader-preview" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="340" width="670" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="rp-hdr" value="Режим чтения лекции: таймер нахождения на странице, видеоплеер, конспект, прикрепленные файлы" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=12;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="350" width="630" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rp-t" value="Таймер чтения: [08:24] | Статус: [Изучено] | Форматы: HTML, Видео, Текст, Документы" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="80" y="390" width="630" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram name="2. Макет модуля тестирования" id="page-tests">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <mxCell id="twnd-1" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="740" height="520" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="thdr-1" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="740" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="t-title" value="Модуль контрольного тестирования (10 из 20 случайных вопросов)" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=13;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="400" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="t-timer" value="Осталось времени: 08:45" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#000000;fontFamily=Times New Roman;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="580" y="50" width="180" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- навигация по 10 вопросам -->
+        <mxCell id="q1" value="1" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#000000;fontColor=#FFFFFF;fontFamily=Times New Roman;fontSize=11;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="60" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q2" value="2" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="100" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q3" value="3" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="140" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q4" value="4" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="180" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q5" value="5" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="220" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q6" value="6" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="260" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q7" value="7" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="300" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q8" value="8" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="340" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q9" value="9" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="380" y="110" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="q10" value="10" style="ellipse;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontColor=#000000;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="420" y="110" width="30" height="30" as="geometry" /></mxCell>
+        
+        <!-- карточка вопроса -->
+        <mxCell id="qbox" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="700" height="280" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="qtext" value="Вопрос 1: Что такое «структура проекта» при разработке программного обеспечения?" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontFamily=Times New Roman;fontSize=13;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="660" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- 4 варианта ответа с кружками радиокнопок -->
+        <mxCell id="opt-1" value="(o) Логическая и физическая организация файлов, модулей и зависимостей в кодовой базе" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#F5F5F5;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="80" y="220" width="660" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="opt-2" value="( ) Только визуальная тема оформления среды разработки IDE" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="80" y="265" width="660" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="opt-3" value="( ) Список установленных на компьютере разработчика программ" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="80" y="310" width="660" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="opt-4" value="( ) Размер скомпилированного бинарного файла на диске" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="80" y="355" width="660" height="36" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="btn-next" value="Далее →" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#000000;fontFamily=Times New Roman;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="640" y="470" width="120" height="34" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="btn-prev" value="← Назад" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Times New Roman;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="60" y="470" width="100" height="34" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

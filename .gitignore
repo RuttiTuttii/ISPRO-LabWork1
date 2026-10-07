@@ -1,0 +1,12 @@
+# виртуальные окружения и кэш питона
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# база данных и логи
+database/app.db
+*.log
+
+# node
+node_modules/

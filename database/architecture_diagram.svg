@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680">
+  <defs>
+    <style>
+      .arch-title { font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .layer-title { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; }
+      .comp-title { font-family: 'Times New Roman', serif; font-size: 12px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .comp-desc { font-family: 'Times New Roman', serif; font-size: 11px; fill: #333333; text-anchor: middle; }
+      .layer-box { fill: #FAFAFA; stroke: #000000; stroke-width: 1.5; stroke-dasharray: 4,4; }
+      .comp-box { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .arrow { stroke: #000000; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#000000" />
+    </marker>
+  </defs>
+
+  <!-- Заголовок схемы -->
+  <text x="500" y="30" class="arch-title">Многоуровневая структура проекта программного комплекса (Layered Architecture)</text>
+  <text x="500" y="50" font-family="Times New Roman" font-size="12px" fill="#444444" text-anchor="middle">ГОСТ 19.701-90 / Стандарты ЕСПД. Разделение ответственности (SoC, DIP, SRP)</text>
+
+  <!-- Слой 1: Клиентский интерфейс (Frontend SPA) -->
+  <rect class="layer-box" x="40" y="70" width="920" height="150" />
+  <text x="60" y="95" class="layer-title">1. Уровень представления (Client Presentation Layer — SPA HTML5/CSS3/Vanilla JS)</text>
+
+  <rect class="comp-box" x="70" y="115" width="260" height="85" />
+  <text x="200" y="142" class="comp-title">Модуль лекций (Lectures UI)</text>
+  <text x="200" y="162" class="comp-desc">Каталог, фильтрация по темам,</text>
+  <text x="200" y="178" class="comp-desc">таймер чтения, учет прогресса</text>
+
+  <rect class="comp-box" x="370" y="115" width="260" height="85" />
+  <text x="500" y="142" class="comp-title">Модуль тестирования (Tests UI)</text>
+  <text x="500" y="162" class="comp-desc">Таймер 10 минут, 10/20 вопросов,</text>
+  <text x="500" y="178" class="comp-desc">рандомизация вариантов, шкала</text>
+
+  <rect class="comp-box" x="670" y="115" width="260" height="85" />
+  <text x="800" y="142" class="comp-title">Интерактивный модуль (Interactive UI)</text>
+  <text x="800" y="162" class="comp-desc">DnD сортировка SDLC, DnD группы GoF,</text>
+  <text x="800" y="178" class="comp-desc">SemVer regex, подсказки и разбор</text>
+
+  <!-- Стрелки между 1 и 2 -->
+  <line x1="200" y1="220" x2="200" y2="260" class="arrow" />
+  <line x1="500" y1="220" x2="500" y2="260" class="arrow" />
+  <line x1="800" y1="220" x2="800" y2="260" class="arrow" />
+  <text x="510" y="245" font-family="Times New Roman" font-size="11px" font-style="italic">REST API (JSON over HTTP)</text>
+
+  <!-- Слой 2: Серверный уровень (FastAPI Web Backend) -->
+  <rect class="layer-box" x="40" y="260" width="920" height="170" />
+  <text x="60" y="285" class="layer-title">2. Уровень веб-сервисов и маршрутизации (Application API Layer — FastAPI Python)</text>
+
+  <rect class="comp-box" x="70" y="305" width="190" height="105" />
+  <text x="165" y="335" class="comp-title">auth_router.py</text>
+  <text x="165" y="355" class="comp-desc">Вход, регистрация,</text>
+  <text x="165" y="372" class="comp-desc">переключение ролей</text>
+  <text x="165" y="388" class="comp-desc">(student / teacher)</text>
+
+  <rect class="comp-box" x="290" y="305" width="190" height="105" />
+  <text x="385" y="335" class="comp-title">lectures_router.py</text>
+  <text x="385" y="355" class="comp-desc">CRUD лекций (HTML,</text>
+  <text x="385" y="372" class="comp-desc">видео, MD, docx),</text>
+  <text x="385" y="388" class="comp-desc">трекинг времени</text>
+
+  <rect class="comp-box" x="510" y="305" width="200" height="105" />
+  <text x="610" y="335" class="comp-title">tests_router.py</text>
+  <text x="610" y="355" class="comp-desc">Случайная выборка 10/20,</text>
+  <text x="610" y="372" class="comp-desc">shuffle вариантов, таймер,</text>
+  <text x="610" y="388" class="comp-desc">подсчет баллов и оценок</text>
+
+  <rect class="comp-box" x="740" y="305" width="190" height="105" />
+  <text x="835" y="335" class="comp-title">exercises_router.py</text>
+  <text x="835" y="355" class="comp-desc">Валидация DnD порядка,</text>
+  <text x="835" y="372" class="comp-desc">группировок и regex,</text>
+  <text x="835" y="388" class="comp-desc">подсказки и ошибки</text>
+
+  <!-- Стрелки между 2 и 3 -->
+  <line x1="500" y1="430" x2="500" y2="470" class="arrow" />
+  <text x="510" y="455" font-family="Times New Roman" font-size="11px" font-style="italic">DataAccess / SQL Driver</text>
+
+  <!-- Слой 3: Уровень данных (Persistence Layer — SQLite RDBMS) -->
+  <rect class="layer-box" x="40" y="470" width="920" height="170" />
+  <text x="60" y="495" class="layer-title">3. Уровень хранения данных (Database Persistence Layer — SQLite RDBMS Engine)</text>
+
+  <rect class="comp-box" x="70" y="515" width="260" height="105" />
+  <text x="200" y="545" class="comp-title">Справочники и профили</text>
+  <text x="200" y="568" class="comp-desc">roles, users,</text>
+  <text x="200" y="586" class="comp-desc">topics, lecture_progress</text>
+
+  <rect class="comp-box" x="370" y="515" width="260" height="105" />
+  <text x="500" y="545" class="comp-title">Учебные материалы и банк тестов</text>
+  <text x="500" y="568" class="comp-desc">lectures, test_pools,</text>
+  <text x="500" y="586" class="comp-desc">test_questions, test_options</text>
+
+  <rect class="comp-box" x="670" y="515" width="260" height="105" />
+  <text x="800" y="545" class="comp-title">Результаты и интерактив</text>
+  <text x="800" y="568" class="comp-desc">test_attempts, test_answers,</text>
+  <text x="800" y="586" class="comp-desc">interactive_exercises, attempts</text>
+</svg>

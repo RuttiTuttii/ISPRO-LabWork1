@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 820" width="1150" height="820">
+  <defs>
+    <style>
+      .entity-title { font-family: 'Times New Roman', serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .field-pk { font-family: 'Times New Roman', serif; font-size: 11px; font-weight: bold; fill: #000000; }
+      .field-fk { font-family: 'Times New Roman', serif; font-size: 11px; font-style: italic; fill: #222222; }
+      .field-normal { font-family: 'Times New Roman', serif; font-size: 11px; fill: #111111; }
+      .field-type { font-family: 'Times New Roman', serif; font-size: 10px; fill: #444444; }
+      .entity-box { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .header-box { fill: #EEEEEE; stroke: #000000; stroke-width: 1.5; }
+      .separator { stroke: #000000; stroke-width: 1; }
+      .rel-line { stroke: #000000; stroke-width: 1.2; fill: none; }
+      .rel-crow { stroke: #000000; stroke-width: 1.2; fill: none; }
+      .diagram-title { font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .legend-text { font-family: 'Times New Roman', serif; font-size: 11px; fill: #333333; }
+    </style>
+  </defs>
+
+  <!-- Заголовок схемы -->
+  <text x="575" y="30" class="diagram-title">Схема реляционной базы данных (ER-диаграмма) — ИСРПО ЛР №1</text>
+  <text x="575" y="48" font-family="Times New Roman" font-size="12px" fill="#444444" text-anchor="middle">Нотация Crow's Foot / ГОСТ ЕСПД. Модули: Лекции, Тестирование, Интерактив, Ролевая модель</text>
+
+  <!-- 1. ROLES -->
+  <g transform="translate(40, 70)">
+    <rect class="header-box" x="0" y="0" width="180" height="24" />
+    <rect class="entity-box" x="0" y="24" width="180" height="70" />
+    <text x="90" y="17" class="entity-title">roles</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="180" y2="48" class="separator" />
+    <text x="10" y="64" class="field-normal">name : TEXT (UNIQUE)</text>
+    <text x="10" y="82" class="field-normal">description : TEXT</text>
+  </g>
+
+  <!-- 2. USERS -->
+  <g transform="translate(40, 200)">
+    <rect class="header-box" x="0" y="0" width="200" height="24" />
+    <rect class="entity-box" x="0" y="24" width="200" height="135" />
+    <text x="100" y="17" class="entity-title">users</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="200" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK role_id : INTEGER</text>
+    <text x="10" y="82" class="field-normal">username : TEXT (UNIQUE)</text>
+    <text x="10" y="100" class="field-normal">email : TEXT (UNIQUE)</text>
+    <text x="10" y="118" class="field-normal">password_hash : TEXT</text>
+    <text x="10" y="136" class="field-normal">full_name : TEXT</text>
+    <text x="10" y="152" class="field-normal">created_at : DATETIME</text>
+  </g>
+
+  <!-- 3. TOPICS -->
+  <g transform="translate(320, 70)">
+    <rect class="header-box" x="0" y="0" width="190" height="24" />
+    <rect class="entity-box" x="0" y="24" width="190" height="95" />
+    <text x="95" y="17" class="entity-title">topics</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="190" y2="48" class="separator" />
+    <text x="10" y="64" class="field-normal">title : TEXT</text>
+    <text x="10" y="82" class="field-normal">description : TEXT</text>
+    <text x="10" y="100" class="field-normal">order_index : INTEGER</text>
+    <text x="10" y="114" class="field-normal">created_at : DATETIME</text>
+  </g>
+
+  <!-- 4. LECTURES -->
+  <g transform="translate(320, 220)">
+    <rect class="header-box" x="0" y="0" width="210" height="24" />
+    <rect class="entity-box" x="0" y="24" width="210" height="155" />
+    <text x="105" y="17" class="entity-title">lectures</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="210" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK topic_id : INTEGER</text>
+    <text x="10" y="82" class="field-normal">title : TEXT</text>
+    <text x="10" y="100" class="field-normal">content_type : TEXT</text>
+    <text x="10" y="118" class="field-normal">content : TEXT</text>
+    <text x="10" y="136" class="field-normal">media_url : TEXT</text>
+    <text x="10" y="152" class="field-normal">attachment_name : TEXT</text>
+    <text x="10" y="170" class="field-normal">reading_time_min : INT</text>
+  </g>
+
+  <!-- 5. LECTURE_PROGRESS -->
+  <g transform="translate(40, 410)">
+    <rect class="header-box" x="0" y="0" width="220" height="24" />
+    <rect class="entity-box" x="0" y="24" width="220" height="120" />
+    <text x="110" y="17" class="entity-title">lecture_progress</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="220" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK user_id : INTEGER</text>
+    <text x="10" y="82" class="field-fk">FK lecture_id : INTEGER</text>
+    <text x="10" y="100" class="field-normal">is_visited : BOOLEAN</text>
+    <text x="10" y="118" class="field-normal">time_spent_seconds : INT</text>
+    <text x="10" y="136" class="field-normal">is_completed : BOOLEAN</text>
+  </g>
+
+  <!-- 6. TEST_POOLS -->
+  <g transform="translate(600, 70)">
+    <rect class="header-box" x="0" y="0" width="220" height="24" />
+    <rect class="entity-box" x="0" y="24" width="220" height="130" />
+    <text x="110" y="17" class="entity-title">test_pools</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="220" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK topic_id : INTEGER</text>
+    <text x="10" y="82" class="field-normal">title : TEXT</text>
+    <text x="10" y="100" class="field-normal">time_limit_sec : INT (600)</text>
+    <text x="10" y="118" class="field-normal">total_pool_size : INT (20)</text>
+    <text x="10" y="136" class="field-normal">questions_to_ask : INT (10)</text>
+  </g>
+
+  <!-- 7. TEST_QUESTIONS -->
+  <g transform="translate(600, 240)">
+    <rect class="header-box" x="0" y="0" width="220" height="24" />
+    <rect class="entity-box" x="0" y="24" width="220" height="90" />
+    <text x="110" y="17" class="entity-title">test_questions</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="220" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK pool_id : INTEGER</text>
+    <text x="10" y="82" class="field-normal">question_text : TEXT</text>
+    <text x="10" y="100" class="field-normal">explanation : TEXT</text>
+  </g>
+
+  <!-- 8. TEST_OPTIONS -->
+  <g transform="translate(600, 380)">
+    <rect class="header-box" x="0" y="0" width="220" height="24" />
+    <rect class="entity-box" x="0" y="24" width="220" height="100" />
+    <text x="110" y="17" class="entity-title">test_options</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="220" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK question_id : INTEGER</text>
+    <text x="10" y="82" class="field-normal">option_text : TEXT</text>
+    <text x="10" y="100" class="field-normal">is_correct : BOOLEAN</text>
+    <text x="10" y="116" class="field-normal">order_index : INTEGER</text>
+  </g>
+
+  <!-- 9. TEST_ATTEMPTS -->
+  <g transform="translate(320, 440)">
+    <rect class="header-box" x="0" y="0" width="210" height="24" />
+    <rect class="entity-box" x="0" y="24" width="210" height="150" />
+    <text x="105" y="17" class="entity-title">test_attempts</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="210" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK user_id : INTEGER</text>
+    <text x="10" y="82" class="field-fk">FK pool_id : INTEGER</text>
+    <text x="10" y="100" class="field-normal">score : INTEGER</text>
+    <text x="10" y="118" class="field-normal">total_questions : INTEGER (10)</text>
+    <text x="10" y="136" class="field-normal">percentage : REAL</text>
+    <text x="10" y="154" class="field-normal">grade : TEXT (шкала 90/75/60)</text>
+    <text x="10" y="170" class="field-normal">duration_seconds : INTEGER</text>
+  </g>
+
+  <!-- 10. TEST_ATTEMPT_ANSWERS -->
+  <g transform="translate(600, 530)">
+    <rect class="header-box" x="0" y="0" width="220" height="24" />
+    <rect class="entity-box" x="0" y="24" width="220" height="110" />
+    <text x="110" y="17" class="entity-title">test_attempt_answers</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="220" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK attempt_id : INTEGER</text>
+    <text x="10" y="82" class="field-fk">FK question_id : INTEGER</text>
+    <text x="10" y="100" class="field-fk">FK selected_opt_id : INT</text>
+    <text x="10" y="120" class="field-normal">is_correct : BOOLEAN</text>
+  </g>
+
+  <!-- 11. INTERACTIVE_EXERCISES -->
+  <g transform="translate(880, 70)">
+    <rect class="header-box" x="0" y="0" width="230" height="24" />
+    <rect class="entity-box" x="0" y="24" width="230" height="170" />
+    <text x="115" y="17" class="entity-title">interactive_exercises</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="230" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK topic_id : INTEGER</text>
+    <text x="10" y="82" class="field-normal">exercise_type : TEXT</text>
+    <text x="10" y="100" class="field-normal">title : TEXT</text>
+    <text x="10" y="118" class="field-normal">description : TEXT</text>
+    <text x="10" y="136" class="field-normal">hint : TEXT</text>
+    <text x="10" y="154" class="field-normal">explanation : TEXT</text>
+    <text x="10" y="172" class="field-normal">payload_json : TEXT</text>
+    <text x="10" y="188" class="field-normal">order_index : INTEGER</text>
+  </g>
+
+  <!-- 12. EXERCISE_ATTEMPTS -->
+  <g transform="translate(880, 310)">
+    <rect class="header-box" x="0" y="0" width="230" height="24" />
+    <rect class="entity-box" x="0" y="24" width="230" height="120" />
+    <text x="115" y="17" class="entity-title">exercise_attempts</text>
+    <text x="10" y="42" class="field-pk">PK id : INTEGER</text>
+    <line x1="0" y1="48" x2="230" y2="48" class="separator" />
+    <text x="10" y="64" class="field-fk">FK user_id : INTEGER</text>
+    <text x="10" y="82" class="field-fk">FK exercise_id : INTEGER</text>
+    <text x="10" y="100" class="field-normal">submitted_payload : TEXT</text>
+    <text x="10" y="118" class="field-normal">is_correct : BOOLEAN</text>
+    <text x="10" y="136" class="field-normal">error_details : TEXT</text>
+  </g>
+
+  <!-- СВЯЗИ (Lines with Crow's Foot & 1:N relations) -->
+  <!-- roles -> users (1:N) -->
+  <path d="M 130 164 L 130 200" class="rel-line" />
+  <line x1="124" y1="172" x2="136" y2="172" class="rel-line" />
+  <path d="M 124 195 L 130 200 L 136 195" class="rel-crow" />
+
+  <!-- topics -> lectures (1:N) -->
+  <path d="M 415 189 L 415 220" class="rel-line" />
+  <path d="M 409 215 L 415 220 L 421 215" class="rel-crow" />
+
+  <!-- topics -> test_pools (1:N) -->
+  <path d="M 510 115 L 600 115" class="rel-line" />
+  <path d="M 595 110 L 600 115 L 595 120" class="rel-crow" />
+
+  <!-- topics -> interactive_exercises (1:N) -->
+  <path d="M 510 85 L 880 85" class="rel-line" />
+  <path d="M 875 80 L 880 85 L 875 90" class="rel-crow" />
+
+  <!-- test_pools -> test_questions (1:N) -->
+  <path d="M 710 224 L 710 240" class="rel-line" />
+  <path d="M 705 235 L 710 240 L 715 235" class="rel-crow" />
+
+  <!-- test_questions -> test_options (1:N) -->
+  <path d="M 710 354 L 710 380" class="rel-line" />
+  <path d="M 705 375 L 710 380 L 715 375" class="rel-crow" />
+
+  <!-- users -> lecture_progress (1:N) -->
+  <path d="M 140 359 L 140 410" class="rel-line" />
+  <path d="M 134 405 L 140 410 L 146 405" class="rel-crow" />
+
+  <!-- lectures -> lecture_progress (1:N) -->
+  <path d="M 320 310 L 260 430" class="rel-line" />
+
+  <!-- users -> test_attempts (1:N) -->
+  <path d="M 240 280 L 320 460" class="rel-line" />
+
+  <!-- test_attempts -> test_attempt_answers (1:N) -->
+  <path d="M 530 520 L 600 550" class="rel-line" />
+
+  <!-- users -> exercise_attempts (1:N) -->
+  <path d="M 240 250 L 300 250 L 300 20 L 995 20 L 995 310" class="rel-line" />
+
+  <!-- interactive_exercises -> exercise_attempts (1:N) -->
+  <path d="M 995 264 L 995 310" class="rel-line" />
+  <path d="M 990 305 L 995 310 L 1000 305" class="rel-crow" />
+
+  <!-- Легенда ГОСТ / ЧБ -->
+  <g transform="translate(40, 710)">
+    <rect x="0" y="0" width="1070" height="60" fill="#FAFAFA" stroke="#000000" stroke-width="1" />
+    <text x="20" y="24" class="legend-text" font-weight="bold">Условные обозначения и правила целостности:</text>
+    <text x="20" y="44" class="legend-text">1. PK (Primary Key) — первичный суррогатный ключ (AUTOINCREMENT).</text>
+    <text x="360" y="44" class="legend-text">2. FK (Foreign Key) — внешний ключ с каскадным удалением (ON DELETE CASCADE).</text>
+    <text x="790" y="44" class="legend-text">3. Нотация: 1 : N (один-ко-многим), Crow's Foot.</text>
+  </g>
+</svg>

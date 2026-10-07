@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>ИС Обучения и Тестирования — МДК 02.02 ЛР №1</title>
+  <link rel="stylesheet" href="/static/css/variables.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+
+  <!-- верхняя шапка сайта с навигацией и переключателем ролей -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-block">
+        <div class="logo-dot"></div>
+        <div>
+          <div class="logo-title">ИСРПО / ЛР №1</div>
+          <div class="logo-sub">Структура проекта</div>
+        </div>
+      </div>
+
+      <!-- табы навигации по модулям приложения -->
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="lectures">Лекции</button>
+        <button class="tab-btn" data-tab="tests">Тесты</button>
+        <button class="tab-btn" data-tab="exercises">Интерактив</button>
+        <button class="tab-btn" data-tab="diagrams">Схемы</button>
+      </nav>
+
+      <!-- блок текущего профиля и переключения роли -->
+      <div class="user-block">
+        <span id="current-user-name" style="font-size: 13px; font-weight: 500; color: var(--text-secondary);"></span>
+        <div class="role-switcher">
+          <button id="role-student-btn" class="role-btn active">Студент</button>
+          <button id="role-teacher-btn" class="role-btn">Преподаватель</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- главный рабочий контейнер для страниц -->
+  <main class="main-content">
+    <div id="app-main-view"></div>
+  </main>
+
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
