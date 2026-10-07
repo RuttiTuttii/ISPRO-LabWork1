@@ -1,28 +1,36 @@
 import { api } from "./api.js";
+import { setBreadcrumbs } from "./app.js";
 
-// модуль работы со списком и чтением лекций
+// модуль работы со списком и чтением лекций с тайловой навигацией
 
 let currentLectureId = null;
 let timerInterval = null;
 let heartbeatInterval = null;
 let secondsSpent = 0;
 let currentViewMode = "cards"; // cards или list
+let cachedTopics = [];
 
-export async function initLectures(container) {
+export async function initLectures(container, initialTopicId = null) {
   // очищаем интервалы если висели
   stopTimer();
 
-  // загружаем темы для выпадающего списка
-  const topics = await api.getTopics();
-  const lectures = await api.getLectures();
+  // загружаем темы и лекции
+  cachedTopics = await api.getTopics();
+  const lectures = await api.getLectures(initialTopicId);
 
-  renderCatalog(container, topics, lectures);
+  renderCatalog(container, cachedTopics, lectures, initialTopicId);
 }
 
-function renderCatalog(container, topics, lectures) {
-  // рисуем панель фильтров как в референсе из drawio
+function renderCatalog(container, topics, lectures, selectedTopicId = null) {
+  // обновляем тайловую навигацию наверху
+  updateCatalogBreadcrumbs(selectedTopicId, container);
+
+  // формируем опции селекта
   const topicOptions = topics
-    .map((t) => `<option value="${t.id}">${t.title}</option>`)
+    .map(
+      (t) =>
+        `<option value="${t.id}" ${selectedTopicId === t.id ? "selected" : ""}>${t.title}</option>`
+    )
     .join("");
 
   container.innerHTML = `
@@ -56,14 +64,14 @@ function renderCatalog(container, topics, lectures) {
     </div>
   `;
 
-  // вешаем события на элементы фильтра
+  // элементы фильтра
   const topicSelect = container.querySelector("#topic-filter");
   const searchInput = container.querySelector("#lecture-search");
   const cardsBtn = container.querySelector("#view-cards-btn");
   const listBtn = container.querySelector("#view-list-btn");
   const createBtn = container.querySelector("#create-lecture-btn");
 
-  // переключение вида отображения
+  // переключение вида
   cardsBtn.addEventListener("click", () => {
     currentViewMode = "cards";
     cardsBtn.className = "btn btn-sm btn-primary";
@@ -80,7 +88,7 @@ function renderCatalog(container, topics, lectures) {
     box.className = "lectures-list-view";
   });
 
-  // фильтрация
+  // обработка фильтрации
   const applyFilter = async () => {
     const tid = topicSelect.value ? parseInt(topicSelect.value) : null;
     const query = searchInput.value.trim();
@@ -88,20 +96,41 @@ function renderCatalog(container, topics, lectures) {
     container.querySelector("#lectures-found-badge").textContent = filtered.length;
     container.querySelector("#lectures-container").innerHTML = renderCards(filtered);
     attachCardListeners(container);
+    updateCatalogBreadcrumbs(tid, container);
   };
 
   topicSelect.addEventListener("change", applyFilter);
   searchInput.addEventListener("input", applyFilter);
 
-  // добавление лекции для препода
+  // кнопка добавления лекции для преподавателя
   createBtn.addEventListener("click", () => showCreateModal(container, topics));
 
   attachCardListeners(container);
   checkTeacherRole(container);
 }
 
+function updateCatalogBreadcrumbs(selectedTopicId, container) {
+  // строим тайловую таблетку для каталога
+  if (!selectedTopicId) {
+    setBreadcrumbs([{ label: "Каталог лекций", active: true }]);
+  } else {
+    const topicObj = cachedTopics.find((t) => t.id === selectedTopicId);
+    const title = topicObj ? topicObj.title : "Тема";
+    setBreadcrumbs([
+      {
+        label: "Каталог лекций",
+        onClick: () => initLectures(container, null),
+      },
+      {
+        label: title,
+        active: true,
+      },
+    ]);
+  }
+}
+
 function renderCards(lectures) {
-  // генерим html для карточек
+  // генерация карточек
   if (lectures.length === 0) {
     return `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">Ничего не найдено</div>`;
   }
@@ -135,7 +164,7 @@ function renderCards(lectures) {
 }
 
 function attachCardListeners(container) {
-  // открытие лекции по клику на карточку
+  // клик по карточке лекции
   container.querySelectorAll(".lecture-card").forEach((card) => {
     card.addEventListener("click", () => {
       const id = parseInt(card.getAttribute("data-id"));
@@ -145,13 +174,34 @@ function attachCardListeners(container) {
 }
 
 async function openLecture(container, id) {
-  // загружаем полное содержимое лекции
+  // загрузка содержимого конкретной лекции
   currentLectureId = id;
   const lecture = await api.getLecture(id);
 
   secondsSpent = lecture.time_spent_seconds || 0;
 
-  // рисуем читалку
+  // обновляем тайловую навигацию с хлебными крошками в одну таблетку
+  setBreadcrumbs([
+    {
+      label: "Каталог лекций",
+      onClick: () => {
+        stopTimer();
+        initLectures(container, null);
+      },
+    },
+    {
+      label: lecture.topic_title,
+      onClick: () => {
+        stopTimer();
+        initLectures(container, lecture.topic_id);
+      },
+    },
+    {
+      label: lecture.title,
+      active: true,
+    },
+  ]);
+
   const videoBlock = lecture.media_url
     ? `<div style="margin: 20px 0;"><iframe width="100%" height="380" src="${lecture.media_url}" frameborder="0" allowfullscreen style="border-radius: var(--radius-control);"></iframe></div>`
     : "";
@@ -191,16 +241,16 @@ async function openLecture(container, id) {
     </div>
   `;
 
-  // запускаем таймер нахождения на странице
+  // запускаем счетчик
   startTimer(id);
 
-  // кнопка назад
+  // кнопка возврата
   container.querySelector("#back-to-catalog").addEventListener("click", () => {
     stopTimer();
-    initLectures(container);
+    initLectures(container, lecture.topic_id);
   });
 
-  // кнопка отметить как изученное
+  // кнопка завершения чтения
   const doneBtn = container.querySelector("#mark-done-btn");
   doneBtn.addEventListener("click", async () => {
     await api.updateProgress(id, 0, true);
@@ -210,12 +260,9 @@ async function openLecture(container, id) {
 }
 
 function startTimer(id) {
-  // останавливаем старый таймер если был
   stopTimer();
-
   const timerEl = document.getElementById("live-timer-text");
 
-  // локальный секундный счетчик
   timerInterval = setInterval(() => {
     secondsSpent += 1;
     if (timerEl) {
@@ -223,13 +270,10 @@ function startTimer(id) {
     }
   }, 1000);
 
-  // периодический пинг на бэкенд каждые 5 секунд
   heartbeatInterval = setInterval(async () => {
     try {
       await api.updateProgress(id, 5, null);
-    } catch (e) {
-      // игнорируем сетевые сбои
-    }
+    } catch (e) {}
   }, 5000);
 }
 
@@ -241,14 +285,12 @@ function stopTimer() {
 }
 
 function formatSeconds(sec) {
-  // переводим секунды в формат mm:ss
   const m = Math.floor(sec / 60);
   const s = sec % 60;
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
 async function checkTeacherRole(container) {
-  // показываем кнопку создания только преподавателю
   try {
     const me = await api.getMe();
     const btn = container.querySelector("#create-lecture-btn");
@@ -259,7 +301,6 @@ async function checkTeacherRole(container) {
 }
 
 function showCreateModal(container, topics) {
-  // модалка создания новой лекции для препода
   const topicOpts = topics
     .map((t) => `<option value="${t.id}">${t.title}</option>`)
     .join("");

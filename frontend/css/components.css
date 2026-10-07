@@ -16,6 +16,59 @@
   text-decoration: none;
 }
 
+/* тайловая навигация в одну таблетку */
+.pill-breadcrumb-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.pill-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 4px 6px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-subtle);
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.pill-tile {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.pill-tile:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.pill-tile.active {
+  background-color: var(--bg-accent);
+  color: var(--text-on-dark);
+  font-weight: 600;
+  cursor: default;
+}
+
+.pill-divider {
+  color: var(--text-muted);
+  font-size: 12px;
+  user-select: none;
+  padding: 0 2px;
+}
+
 /* темная основная кнопка */
 .btn-primary {
   background-color: var(--bg-accent);

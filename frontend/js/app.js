@@ -3,13 +3,13 @@ import { initLectures } from "./lectures.js";
 import { initTests } from "./tests.js";
 import { initExercises } from "./exercises.js";
 
-// главный контроллер фронтенда
+// главный контроллер приложения
 
 let currentTab = "lectures";
 let currentUser = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // инициализируем пользователя и шапку
+  // старт приложения
   await loadUserProfile();
   setupNavigation();
   setupRoleSwitcher();
@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function loadUserProfile() {
-  // достаем данные юзера и обновляем бейдж роли
+  // достаем текущего юзера
   try {
     currentUser = await api.getMe();
     updateUserUI();
   } catch (err) {
-    console.error("не удалось получить пользователя", err);
+    console.error("ошибка загрузки профиля", err);
   }
 }
 
@@ -34,7 +34,7 @@ function updateUserUI() {
     roleNameEl.textContent = `${currentUser.full_name} (${currentUser.role_name === "teacher" ? "Преподаватель" : "Студент"})`;
   }
 
-  // подсвечиваем активную кнопку роли
+  // переключаем активную кнопку роли
   const studentBtn = document.getElementById("role-student-btn");
   const teacherBtn = document.getElementById("role-teacher-btn");
 
@@ -50,7 +50,7 @@ function updateUserUI() {
 }
 
 function setupNavigation() {
-  // вешаем клики на табы навигации
+  // клики по вкладкам в шапке
   const tabButtons = document.querySelectorAll(".tab-btn");
   tabButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -61,7 +61,7 @@ function setupNavigation() {
 }
 
 function setupRoleSwitcher() {
-  // обработчики быстрого переключения ролей
+  // переключалка роли
   const studentBtn = document.getElementById("role-student-btn");
   const teacherBtn = document.getElementById("role-teacher-btn");
 
@@ -69,7 +69,6 @@ function setupRoleSwitcher() {
     studentBtn.addEventListener("click", async () => {
       currentUser = await api.switchRole("student");
       updateUserUI();
-      // перезагружаем текущую вкладку
       switchTab(currentTab);
     });
   }
@@ -78,16 +77,51 @@ function setupRoleSwitcher() {
     teacherBtn.addEventListener("click", async () => {
       currentUser = await api.switchRole("teacher");
       updateUserUI();
-      // перезагружаем текущую вкладку
       switchTab(currentTab);
     });
   }
 }
 
-function switchTab(tabName) {
+export function setBreadcrumbs(items) {
+  // тайловая навигация в одну компактную таблетку
+  const container = document.getElementById("breadcrumb-area");
+  if (!container) return;
+
+  if (!items || items.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const breadcrumbPill = document.createElement("nav");
+  breadcrumbPill.className = "pill-breadcrumb";
+
+  items.forEach((item, index) => {
+    if (index > 0) {
+      const divider = document.createElement("span");
+      divider.className = "pill-divider";
+      divider.textContent = "/";
+      breadcrumbPill.appendChild(divider);
+    }
+
+    const tile = document.createElement("button");
+    tile.className = `pill-tile ${item.active ? "active" : ""}`;
+    tile.textContent = item.label;
+
+    if (item.onClick && !item.active) {
+      tile.addEventListener("click", item.onClick);
+    }
+
+    breadcrumbPill.appendChild(tile);
+  });
+
+  container.innerHTML = "";
+  container.appendChild(breadcrumbPill);
+}
+
+export function switchTab(tabName) {
   currentTab = tabName;
 
-  // меняем активный класс на кнопке таба
+  // обновляем активный таб
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     if (btn.getAttribute("data-tab") === tabName) {
       btn.classList.add("active");
@@ -99,20 +133,32 @@ function switchTab(tabName) {
   const contentArea = document.getElementById("app-main-view");
   contentArea.innerHTML = "";
 
-  // запускаем рендеринг нужного модуля
+  // отрисовываем нужный экран
   if (tabName === "lectures") {
     initLectures(contentArea);
   } else if (tabName === "tests") {
+    setBreadcrumbs([
+      { label: "Каталог", onClick: () => switchTab("lectures") },
+      { label: "Контрольное тестирование", active: true },
+    ]);
     initTests(contentArea);
   } else if (tabName === "exercises") {
+    setBreadcrumbs([
+      { label: "Каталог", onClick: () => switchTab("lectures") },
+      { label: "Интерактивные задания", active: true },
+    ]);
     initExercises(contentArea);
   } else if (tabName === "diagrams") {
+    setBreadcrumbs([
+      { label: "Каталог", onClick: () => switchTab("lectures") },
+      { label: "Схемы архитектуры и БД", active: true },
+    ]);
     renderDiagrams(contentArea);
   }
 }
 
 function renderDiagrams(container) {
-  // экран со схемами архитектуры и бд в чб
+  // просмотр диаграмм в чб
   container.innerHTML = `
     <div style="display: flex; flex-direction: column; gap: 32px;">
       <div class="diagram-viewer">
