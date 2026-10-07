@@ -148,3 +148,43 @@ def test_interactive_exercises_verification():
     )
     assert regex_res.status_code == 200
     assert regex_res.json()["is_correct"] is True
+
+
+def test_regex_exercise_variations():
+    # проверяем все варианты написания эталона пользователем
+    valid_variations = [
+        r"^v?\d+\.\d+\.\d+$",
+        r"v?\d+\.\d+\.\d+",
+        r"/^v?\d+\.\d+\.\d+$/",
+        r"/^v?\d+\.\d+\.\d+/g",
+        r"^v?\d+\.\d+\.\d+",
+        r"^v?[0-9]+\.[0-9]+\.[0-9]+$",
+        r"v?[0-9]+\.[0-9]+\.[0-9]+",
+        r"^v?\d+(\.\d+){2}$",
+        r"v?(\d+)\.(\d+)\.(\d+)",
+        "^v?\\\\d+\\\\.\\\\d+\\\\.\\\\d+$",
+        "  ^v?\\d+\\.\\d+\\.\\d+$  ",
+        "`^v?\\d+\\.\\d+\\.\\d+$`",
+        "'^v?\\d+\\.\\d+\\.\\d+$'",
+    ]
+
+    for pat in valid_variations:
+        res = client.post("/api/exercises/3/verify", json={"submission": pat})
+        assert res.status_code == 200, f"запрос упал на паттерне: {pat}"
+        data = res.json()
+        assert data["is_correct"] is True, f"не прошел валидный паттерн: {pat}, ошибки: {data.get('errors')}"
+
+    # проверяем заведомо неверные варианты
+    invalid_variations = [
+        r"hello_world",
+        r"^\d+$",
+        r"[a-z]+",
+        r"(invalid_regex[",
+    ]
+
+    for bad_pat in invalid_variations:
+        res = client.post("/api/exercises/3/verify", json={"submission": bad_pat})
+        assert res.status_code == 200
+        data = res.json()
+        assert data["is_correct"] is False
+

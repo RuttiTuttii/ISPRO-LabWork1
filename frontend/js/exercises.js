@@ -12,7 +12,11 @@ export async function initExercises(container) {
   // загружаем список доступных заданий
   exercisesList = await api.getExercises();
   if (exercisesList.length > 0) {
-    currentExerciseId = exercisesList[0].id;
+    // если в url передан номер конкретного упражнения выбираем его
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetId = parseInt(urlParams.get("exercise"));
+    const match = exercisesList.find((e) => e.id === targetId);
+    currentExerciseId = match ? match.id : exercisesList[0].id;
     await loadExercise(container, currentExerciseId);
   } else {
     container.innerHTML = `<div style="text-align:center; padding:40px;">Заданий не найдено</div>`;
@@ -101,6 +105,26 @@ function renderExerciseLayout(container) {
   container.querySelector("#verify-exercise-btn").addEventListener("click", () => {
     verifyCurrentExercise(container);
   });
+
+  // вешаем быстрый сабмит по enter на поле ввода регулярки
+  const regexInput = container.querySelector("#regex-input");
+  if (regexInput) {
+    regexInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        verifyCurrentExercise(container);
+      }
+    });
+  }
+
+  // подставляем эталонный ответ по клику для удобства проверки
+  const fillSampleBtn = container.querySelector("#fill-sample-regex-btn");
+  if (fillSampleBtn && regexInput) {
+    fillSampleBtn.addEventListener("click", () => {
+      regexInput.value = "^v?\\d+\\.\\d+\\.\\d+$";
+      regexInput.focus();
+    });
+  }
 
   // инициализация drag and drop если нужно
   attachDragAndDropHandlers(container);
@@ -200,7 +224,10 @@ function renderInteractiveContent() {
     return `
       <div style="max-width: 640px; margin: 0 auto;">
         <label style="display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px;">Введите регулярное выражение:</label>
-        <input type="text" id="regex-input" class="custom-input" placeholder="^v?\\d+\\.\\d+\\.\\d+$" style="font-family: monospace; font-size: 15px;" />
+        <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+          <input type="text" id="regex-input" class="custom-input" placeholder="^v?\\d+\\.\\d+\\.\\d+$" style="font-family: monospace; font-size: 15px; flex: 1;" />
+          <button id="fill-sample-regex-btn" type="button" class="btn btn-secondary btn-sm" style="white-space: nowrap;">Вставить эталон</button>
+        </div>
         
         <div style="margin-top: 16px;">
           <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Тестовые кейсы для проверки:</div>

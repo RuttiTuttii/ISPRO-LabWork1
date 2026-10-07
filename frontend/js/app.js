@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadUserProfile();
   setupNavigation();
   setupRoleSwitcher();
-  switchTab("lectures");
+  // если в хэше передан раздел открываем его иначе лекции по дефолту
+  const initialHash = window.location.hash.replace("#", "");
+  const allowedTabs = ["lectures", "tests", "exercises"];
+  const targetTab = allowedTabs.includes(initialHash) ? initialHash : "lectures";
+  switchTab(targetTab);
 });
 
 async function loadUserProfile() {
@@ -148,28 +152,6 @@ export function switchTab(tabName) {
       { label: "Интерактивные задания", active: true },
     ]);
     initExercises(contentArea);
-  } else if (tabName === "diagrams") {
-    setBreadcrumbs([
-      { label: "Каталог", onClick: () => switchTab("lectures") },
-      { label: "Схемы архитектуры и БД", active: true },
-    ]);
-    renderDiagrams(contentArea);
   }
 }
 
-function renderDiagrams(container) {
-  // просмотр диаграмм в чб
-  container.innerHTML = `
-    <div style="display: flex; flex-direction: column; gap: 32px;">
-      <div class="diagram-viewer">
-        <h3 style="margin-bottom: 16px; font-size: 16px;">1. ER-диаграмма базы данных (ГОСТ / ч-б Times New Roman)</h3>
-        <img src="/static/../database/erd_diagram.svg" alt="ERD Diagram" style="max-width: 100%; border: 1px solid var(--border-light); border-radius: var(--radius-control);" />
-      </div>
-
-      <div class="diagram-viewer">
-        <h3 style="margin-bottom: 16px; font-size: 16px;">2. Архитектура структуры проекта (Layered Architecture)</h3>
-        <img src="/static/../database/architecture_diagram.svg" alt="Architecture Diagram" style="max-width: 100%; border: 1px solid var(--border-light); border-radius: var(--radius-control);" />
-      </div>
-    </div>
-  `;
-}

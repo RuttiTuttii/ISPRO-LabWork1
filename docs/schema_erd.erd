@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="ispro_erd">
+	<entities>
+		<data-source id="sqlite_jdbc-ispro">
+			<entity id="1" name="roles" fq-name="roles" order="0" x="40" y="40">
+				<path name="roles"/>
+			</entity>
+			<entity id="2" name="users" fq-name="users" order="1" x="40" y="240">
+				<path name="users"/>
+			</entity>
+			<entity id="3" name="topics" fq-name="topics" order="2" x="380" y="40">
+				<path name="topics"/>
+			</entity>
+			<entity id="4" name="lectures" fq-name="lectures" order="3" x="380" y="240">
+				<path name="lectures"/>
+			</entity>
+			<entity id="5" name="lecture_progress" fq-name="lecture_progress" order="4" x="40" y="520">
+				<path name="lecture_progress"/>
+			</entity>
+			<entity id="6" name="test_pools" fq-name="test_pools" order="5" x="720" y="40">
+				<path name="test_pools"/>
+			</entity>
+			<entity id="7" name="test_questions" fq-name="test_questions" order="6" x="720" y="290">
+				<path name="test_questions"/>
+			</entity>
+			<entity id="8" name="test_options" fq-name="test_options" order="7" x="720" y="500">
+				<path name="test_options"/>
+			</entity>
+			<entity id="9" name="test_attempts" fq-name="test_attempts" order="8" x="1060" y="40">
+				<path name="test_attempts"/>
+			</entity>
+			<entity id="10" name="test_attempt_answers" fq-name="test_attempt_answers" order="9" x="1060" y="340">
+				<path name="test_attempt_answers"/>
+			</entity>
+			<entity id="11" name="interactive_exercises" fq-name="interactive_exercises" order="10" x="380" y="560">
+				<path name="interactive_exercises"/>
+			</entity>
+			<entity id="12" name="exercise_attempts" fq-name="exercise_attempts" order="11" x="380" y="840">
+				<path name="exercise_attempts"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="fk_users_roles" fq-name="users.fk_users_roles" type="fk" pk-ref="1" fk-ref="2"/>
+		<relation name="fk_lectures_topics" fq-name="lectures.fk_lectures_topics" type="fk" pk-ref="3" fk-ref="4"/>
+		<relation name="fk_lecture_progress_users" fq-name="lecture_progress.fk_lecture_progress_users" type="fk" pk-ref="2" fk-ref="5"/>
+		<relation name="fk_lecture_progress_lectures" fq-name="lecture_progress.fk_lecture_progress_lectures" type="fk" pk-ref="4" fk-ref="5"/>
+		<relation name="fk_test_pools_topics" fq-name="test_pools.fk_test_pools_topics" type="fk" pk-ref="3" fk-ref="6"/>
+		<relation name="fk_test_questions_pools" fq-name="test_questions.fk_test_questions_pools" type="fk" pk-ref="6" fk-ref="7"/>
+		<relation name="fk_test_options_questions" fq-name="test_options.fk_test_options_questions" type="fk" pk-ref="7" fk-ref="8"/>
+		<relation name="fk_test_attempts_users" fq-name="test_attempts.fk_test_attempts_users" type="fk" pk-ref="2" fk-ref="9"/>
+		<relation name="fk_test_attempts_pools" fq-name="test_attempts.fk_test_attempts_pools" type="fk" pk-ref="6" fk-ref="9"/>
+		<relation name="fk_test_attempt_answers_attempts" fq-name="test_attempt_answers.fk_test_attempt_answers_attempts" type="fk" pk-ref="9" fk-ref="10"/>
+		<relation name="fk_test_attempt_answers_questions" fq-name="test_attempt_answers.fk_test_attempt_answers_questions" type="fk" pk-ref="7" fk-ref="10"/>
+		<relation name="fk_test_attempt_answers_options" fq-name="test_attempt_answers.fk_test_attempt_answers_options" type="fk" pk-ref="8" fk-ref="10"/>
+		<relation name="fk_interactive_exercises_topics" fq-name="interactive_exercises.fk_interactive_exercises_topics" type="fk" pk-ref="3" fk-ref="11"/>
+		<relation name="fk_exercise_attempts_users" fq-name="exercise_attempts.fk_exercise_attempts_users" type="fk" pk-ref="2" fk-ref="12"/>
+		<relation name="fk_exercise_attempts_exercises" fq-name="exercise_attempts.fk_exercise_attempts_exercises" type="fk" pk-ref="11" fk-ref="12"/>
+	</relations>
+	<notes/>
+</diagram>

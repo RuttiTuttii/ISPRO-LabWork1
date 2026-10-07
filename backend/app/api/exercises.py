@@ -163,25 +163,37 @@ def verify_exercise(exercise_id: int, req: ExerciseVerifyRequest):
 
         # проверяем регулярку
         elif exercise_type == "regex":
-            user_pattern = str(req.submission).strip()
+            raw_input = str(req.submission).strip()
             test_cases = payload.get("test_cases", [])
 
+            # очищаем ввод от пробелов, внешних кавычек и бэктиков
+            clean_pat = raw_input.strip("'`\" ").strip()
+
+            # снимаем javascript-обертку /pattern/flags если передали в js-нотации
+            js_match = re.match(r"^/(.+)/([a-z]*)$", clean_pat)
+            if js_match:
+                clean_pat = js_match.group(1).strip()
+
+            # если юзер скопировал строку с двойным экранированием из json или кода, нормализуем
+            clean_pat = clean_pat.replace("\\\\", "\\")
+
             try:
-                # пробуем скомпилировать регулярку
-                compiled = re.compile(user_pattern)
+                # компилируем нормализованную регулярку
+                compiled = re.compile(clean_pat)
                 failed_cases = []
-                # прогоняем через тестовые строки
+                # проверяем по тест-кейсам через fullmatch
                 for tc in test_cases:
                     inp = tc["input"]
                     expected_match = tc["should_match"]
-                    actual_match = bool(compiled.search(inp) if not user_pattern.startswith("^") else compiled.match(inp))
+                    # fullmatch строго проверяет всю строку даже если юзер забыл ^ или $
+                    actual_match = bool(compiled.fullmatch(inp))
                     if actual_match != expected_match:
                         status = "должно подходить, но regex не пропустил" if expected_match else "не должно подходить, но regex пропустил"
                         failed_cases.append(f"строка '{inp}': {status}")
 
                 if not failed_cases:
                     is_correct = True
-                    message = "регулярка прошла все проверки"
+                    message = "регулярка успешно прошла все проверки"
                 else:
                     errors = failed_cases
                     message = f"тестов провалено: {len(failed_cases)} из {len(test_cases)}"

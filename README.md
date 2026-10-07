@@ -25,8 +25,9 @@ npm test
 ## Структура проекта
 - `backend/` — серверный код на Python 3.12 (FastAPI, SQLite, Pytest)
 - `frontend/` — клиентский SPA интерфейс (HTML5, нативный CSS3, Vanilla JS)
-- `database/` — схема `schema.sql`, начальные данные `seed.sql`, ERD и архитектурные диаграммы
-- `docs/` — отчеты по лабораторной работе (Markdown, Typst, скомпилированный PDF, макеты `LabWork1.drawio`)
+- `database/` — схема `schema.sql`, начальные данные `seed.sql`, база `app.db`
+- `docs/` — отчеты по лабораторной работе (Markdown, Typst, скомпилированный PDF), макеты интерфейса и архитектуры `LabWork1.drawio`, ERD диаграмма и проект DBeaver `schema_erd.erd`
+- `.dbeaver/` — конфигурация подключения к SQLite для открытия ERD в DBeaver Community
 - `run.js` — скрипт одновременного запуска бэкенда и фронтенда без сторонних утилит
 - `package.json` — конфигурация запуска `npm start` и `npm run dev`
 
